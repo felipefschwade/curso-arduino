@@ -3,6 +3,11 @@
 #define LED_AZUL 4
 #define LED_VERMELHO 5
 #define TAMANHO_SEQUENCIA 4
+#define BOTAO_VERDE 8
+#define BOTAO_AMARELO 9
+#define BOTAO_AZUL 10
+#define BOTAO_VERMELHO 11
+
 int sequenciaLuzes[TAMANHO_SEQUENCIA]; //Define uma variavel sequencia em escopo global
 
 void setup() {
@@ -12,13 +17,8 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  delay(1000); //Espera 1 segundo após o jogo iniciar
-  for(int i = 0; i < TAMANHO_SEQUENCIA; i++) {
-      Serial.println(sequenciaLuzes[i]);
-      piscaLed(sequenciaLuzes[i]);
-    }
-    piscaSequencia2();
+    int estado = digitalRead(BOTAO_VERDE);
+    Serial.println(estado);
 }
 
 //Função Para piscar os leds
@@ -37,6 +37,10 @@ void iniciaPortas() {
    pinMode(LED_AMARELO, OUTPUT); 
    pinMode(LED_AZUL, OUTPUT); 
    pinMode(LED_VERMELHO, OUTPUT); 
+   pinMode(BOTAO_VERDE,INPUT_PULLUP);
+   pinMode(BOTAO_AMARELO,INPUT_PULLUP);
+   pinMode(BOTAO_VERMELHO,INPUT_PULLUP);
+   pinMode(BOTAO_AZUL,INPUT_PULLUP);
   }
 //Define uma sequencia que os leds piscaram no começo do jogo
 void iniciaJogo() {
